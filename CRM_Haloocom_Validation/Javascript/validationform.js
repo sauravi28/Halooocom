@@ -1,0 +1,100 @@
+
+//alert('Outside');
+function getcheckContactsName(){
+var name,
+element = document.getElementById('account_name');
+if (element != null) {
+    name = element.value;
+}
+else {
+    name = null;
+	//alert("empty str");
+}
+	
+//alert(name);
+if(name != null){
+	
+	const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+		  var result = this.responseText;
+		//alert(result);
+		
+		if(result == 1)
+		{
+			alert("The SLA/AMC for Account "+name+" is expired..");
+			
+			document.getElementById('account_name').value='';
+			document.getElementById('account_id').value='';
+			
+			return false;
+			
+		}
+		
+			
+	  }	  
+	  xhttp.open("GET", "include/javascript/takeContactsNameSlaDate.php?name="+name);
+	  xhttp.send();
+	}	
+}
+getcheckContactsName();
+const sauravi = setInterval(function() {getcheckContactsName()}, 3000);
+	
+
+function getcheckContactsNameSupport(){
+var nameVal,
+element = document.getElementById('account_name');
+if (element != null) {
+    nameVal = element.value;
+}
+else {
+    nameVal = null;
+	//alert("empty str");
+}
+	
+//alert(nameVal);
+if(nameVal != null){
+	
+	const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+		  var result = this.responseText;
+		//alert(result);
+		
+		if(result == 1)
+		{
+			alert("The SLA/AMC for Account "+nameVal+" is not in support..");
+			
+			document.getElementById('account_name').value='';
+			document.getElementById('account_id').value='';
+			
+			return false;
+			
+		}
+		
+			
+	  }	  
+	  xhttp.open("GET", "include/javascript/takeContactsNameSlaSupport.php?name="+name);
+	  xhttp.send();
+	}	
+}
+getcheckContactsNameSupport();
+const sauravi1 = setInterval(function() {getcheckContactsNameSupport()}, 3000);
+
+function check_form(EditView)
+    {
+	
+		var state = document.getElementById('state').value;
+		//alert(state);
+		var end_date = document.getElementById('end_date_c_date').value;
+		
+		if((state == "Resolved" || state == "Closed")&& (end_date == ""))
+		{
+			alert("Please Select End Date and Time.");
+			return false;
+		}
+		else
+		{
+			return validate_form(EditView, '');
+        }	
+	
+    }
+
