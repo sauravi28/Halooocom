@@ -395,8 +395,21 @@ if ($calls_summary)
 	$pfPAUSE_AVG_MS =		sprintf("%6s", $PAUSE_AVG_MS);
 	$pfWAIT_AVG_MS =		sprintf("%6s", $WAIT_AVG_MS);
 	$pfWRAPUP_AVG_MS =		sprintf("%6s", $WRAPUP_AVG_MS);
+	
+	$stmtoutCall="select count(*) from vicidial_log where call_date <= '" . mysqli_real_escape_string($link, $query_date_END) . "' and call_date >= '" . mysqli_real_escape_string($link, $query_date_BEGIN) . "' and user='" . mysqli_real_escape_string($link, $agent) . "'";
+	//echo "======================================>>>>>>>>>>".$stmtoutCall;
+	$rslt=mysql_to_mysqli($stmtoutCall, $link);
+	if ($DB) {$MAIN.="$stmtoutCall\n";}
+	$rowoutCall=mysqli_fetch_row($rslt);
+	
+	$stmtinCall="select count(*) from vicidial_closer_log where call_date <= '" . mysqli_real_escape_string($link, $query_date_END) . "' and call_date >= '" . mysqli_real_escape_string($link, $query_date_BEGIN) . "' and user='" . mysqli_real_escape_string($link, $agent) . "'";
+	$rslt=mysql_to_mysqli($stmtinCall, $link);
+	if ($DB) {$MAIN.="$stmtinCall\n";}
+	$rowinCall=mysqli_fetch_row($rslt);
+	
+	$callTaken = $rowoutCall[0] + $rowinCall[0];
 
-	$MAIN.="<center><b>"._QXZ("TOTAL CALLS TAKEN",17).": $row[0] <a href='$PHP_SELF?calls_summary=$calls_summary&agent=$agent&query_date=$query_date&query_dateend=$query_dateend&file_download=1&search_archived_data=$search_archived_data'>["._QXZ("DOWNLOAD")."]</a></b>\n";
+	$MAIN.="<center><b>"._QXZ("TOTAL CALLS TAKEN",17).": $callTaken <a href='$PHP_SELF?calls_summary=$calls_summary&agent=$agent&query_date=$query_date&query_dateend=$query_dateend&file_download=1&search_archived_data=$search_archived_data'>["._QXZ("DOWNLOAD")."]</a></b>\n";
 	$MAIN.="<table class='titleline' style='width:28%;'><tbody><tr><td align='LEFT' bgcolor='#015B91' height='2' colspan='2'></td></tr></tbody></table></center>";
 	$MAIN.=_QXZ("TALK TIME",24).": $pfTALK_TIME_HMS  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"._QXZ("AVERAGE",11,"r")."</b>: $pfTALK_AVG_MS\n";
 	$MAIN.=_QXZ("PAUSE TIME",24).": $pfPAUSE_TIME_HMS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"._QXZ("AVERAGE",11,"r")."</b>: $pfPAUSE_AVG_MS\n";
@@ -405,7 +418,7 @@ if ($calls_summary)
 	
 	$MAIN.="<font class='addfootersmall'><b>"._QXZ("TOTAL ACTIVE AGENT TIME").": $pfTOTAL_TIME_HMS</b></font>\n\n";
 	$CSV_text1.=$CSV_text_header;
-	$CSV_text1.="\"\",\""._QXZ("TOTAL CALLS TAKEN").": $row[0]\"\n";
+	$CSV_text1.="\"\",\""._QXZ("TOTAL CALLS TAKEN").": $callTaken\"\n";
 	$CSV_text1.="\"\",\""._QXZ("TALK TIME").":\",\"$pfTALK_TIME_HMS\",\""._QXZ("AVERAGE").":\",\"$pfTALK_AVG_MS\"\n";
 	$CSV_text1.="\"\",\""._QXZ("PAUSE TIME").":\",\"$pfPAUSE_TIME_HMS\",\""._QXZ("AVERAGE").":\",\"$pfPAUSE_AVG_MS\"\n";
 	$CSV_text1.="\"\",\""._QXZ("WAIT TIME").":\",\"$pfWAIT_TIME_HMS\",\""._QXZ("AVERAGE").":\",\"$pfWAIT_AVG_MS\"\n";
@@ -417,6 +430,22 @@ else
 	$MAIN.="<a href=\"$PHP_SELF?calls_summary=1&agent=$agent&query_date=$query_date&query_dateend=$query_dateend\" class='btn bg-purple margin' style='margin:3px;'>"._QXZ("Call Activity Summary")."</a>\n\n";
 
 	}
+
+
+
+$stmt="select sum(wait_sec+talk_sec+dispo_sec+dead_sec+pause_sec) from ".$vicidial_agent_log_table." where event_time <= '" . mysqli_real_escape_string($link, $query_date_END) . "' and event_time >= '" . mysqli_real_escape_string($link, $query_date_BEGIN) . "' and user='" . mysqli_real_escape_string($link, $agent) . "'";
+$rslt=mysql_to_mysqli($stmt, $link);
+if ($DB) {$MAIN.="$stmt\n";}
+$row=mysqli_fetch_row($rslt);
+
+
+$TOTAL_TIMELogin = $row[0];
+
+	$TOTAL_TIME_HMSLogin =		sec_convert($TOTAL_TIMELogin,'H'); 
+	
+	$pfTOTAL_TIME_HMSLogin =		sprintf("%8s", $TOTAL_TIME_HMSLogin);
+
+
 
 $stmt="select event_time,UNIX_TIMESTAMP(event_time) from ".$vicidial_agent_log_table." where event_time <= '" . mysqli_real_escape_string($link, $query_date_END) . "' and event_time >= '" . mysqli_real_escape_string($link, $query_date_BEGIN) . "' and user='" . mysqli_real_escape_string($link, $agent) . "' order by event_time limit 1;";
 $rslt=mysql_to_mysqli($stmt, $link);
@@ -442,30 +471,11 @@ $login_time = ($end - $start);
 $LOGIN_TIME_HMS =		sec_convert($login_time,'H'); 
 $pfLOGIN_TIME_HMS =		sprintf("%8s", $LOGIN_TIME_HMS);
 
-$stmt="select sum(wait_sec+talk_sec+dispo_sec+dead_sec+pause_sec) from ".$vicidial_agent_log_table." where event_time <= '" . mysqli_real_escape_string($link, $query_date_END) . "' and event_time >= '" . mysqli_real_escape_string($link, $query_date_BEGIN) . "' and user='" . mysqli_real_escape_string($link, $agent) . "'";
-$rslt=mysql_to_mysqli($stmt, $link);
-if ($DB) {$MAIN.="$stmt\n";}
-$row=mysqli_fetch_row($rslt);
-
-$login_secVal = $row[0];
-$login_sec1 = $row[0];
-
-if($login_secVal <= '3600')
-{
-$login_secVal = 1;
-}
-else
-{	
-$login_secVal = gmdate("H", $login_secVal);	
-}
-$login_timeVal = gmdate("H:i:s", $login_sec1);
 
 
+$MAIN.="<br><b>"._QXZ("TOTAL LOGGED-IN TIME",32)." $pfTOTAL_TIME_HMSLogin</b>\n";
 
-
-$MAIN.="<br><b>"._QXZ("TOTAL LOGGED-IN TIME",32)." $login_timeVal</b>\n";
-
-$CSV_login.="\"\",\""._QXZ("TOTAL LOGGED-IN TIME").":\",\"$login_timeVal\"\n\n";
+$CSV_login.="\"\",\""._QXZ("TOTAL LOGGED-IN TIME").":\",\"$pfTOTAL_TIME_HMSLogin\"\n\n";
 $CSV_text1.=$CSV_login;
 
 ### timeclock records
