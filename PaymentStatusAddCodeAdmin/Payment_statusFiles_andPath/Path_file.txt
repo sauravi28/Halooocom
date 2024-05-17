@@ -1,0 +1,4 @@
+1) Add files in htdocs - 1) paymentStatusFile.php
+2) Add folder in htdocs - 1)uploadsPaymentStatus_files
+3) Add Payment Status Module Link in - admin/head.php
+3) Import Sql file in database - vicidial_PaymentStatus_data.sql
