@@ -1,0 +1,5 @@
+1) For Agent FAQ - Add agentfaq.html file in haloocom_connect4 folder.
+2) For Agent FAQ Link - link in haloocom.php file 
+
+3) Admin FAQ - Add FAQ_Admin Folder Add in /srv/www/htdocs/admin folder.
+4) For Admin FAQ Link - code Added in /srv/www/htdocs/admin/head.php file.

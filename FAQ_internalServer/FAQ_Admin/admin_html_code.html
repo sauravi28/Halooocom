@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HalooCONNECT FAQ</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 20px;
+		}
+		h1 {
+			text-align: center;
+		}
+		ol {
+			list-style-type: decimal;
+			padding-left: 20px;
+		}
+		li {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body style="background:url(login2.png) fixed no-repeat;background-size:cover";>
+
+<div class="row">
+
+    <div class="col-sm-4"><img src="logo2.png" name="logo" alt="logo" width="190px" height="80px" border="0" style="margin-left:153px;" /></div>
+    <div class="col-sm-4"><h2 align="center" style="color:#6eba01;margin-top:20px;">HalooCONNECT FAQ<h2></div>
+    
+</div>
+
+	<ol>
+		<li>
+			<h3>What is the purpose of this manual?</h3>
+			<p>This manual serves as a resource for Call Center Managers and System Administrators to understand how the HalooCONNECT call center solution works and learn how to use its features properly.</p>
+		</li>
+		<li>
+			<h3>How do I access the HalooCONNECT admin page?</h3>
+			<p>Enter the IP address of the server (e.g., 10.9.6.3) in a web browser. Then click on the "Admin" option and enter the admin username and password.</p>
+		</li>
+		<li>
+			<h3>How do I create a new user?</h3>
+			<p>Click on "Users" menu > "Add a new user". Enter the username, password, and set the user level (6 for agents, 9 for administrators). Optionally, enter phone login and password for extension login.</p>
+		</li>
+		<li>
+			<h3>How do I modify user settings?</h3>
+			<p>Click on the user ID you want to modify, then make changes like updating passwords or enabling/disabling features like manual dial, scheduled callback, hotkeys, etc. Click "Submit" to save changes.</p>
+		</li>
+		<li>
+			<h3>How do I delete a user?</h3>
+			<p>Click on the username you want to delete, then click "DELETE THIS USER" and confirm deletion.</p>
+		</li>
+		<li>
+			<h3>How do I copy user settings to a new user?</h3>
+			<p>Click "Copy User", enter the new username and password. The other settings will be copied from the source user.</p>
+		</li>
+		<li>
+			<h3>How do I view user activity statistics?</h3>
+			<p>Go to "Users" menu > "User Stats". Select the start/end date and username to generate the report.</p>
+		</li>
+		<li>
+			<h3>How do I modify a campaign?</h3>
+			<p>Click on the "Campaign ID" you want to modify, then click "Detail" to edit campaign options.</p>
+		</li>
+		<li>
+			<h3>How do I delete a campaign?</h3>
+			<p>Select the campaign, scroll down, click "DELETE THIS CAMPAIGN", then confirm deletion.</p>
+		</li>
+		<li>
+			<h3>How do I copy a campaign?</h3>
+			<p>Click "Copy Campaign" to create a new campaign with the same settings as the source campaign (leads are not copied).</p>
+		</li>
+		<li>
+			<h3>What is a "Hopper" in a campaign?</h3>
+			<p>The Hopper is a buffer that loads a pre-set number of leads from the database for outbound dialing.</p>
+		</li>
+		<li>
+			<h3>What are Statuses and how do I add them?</h3>
+			<p>Statuses are dispositions that agents select during call wrap-up. Go to "Campaigns" menu > "Statuses" to add new dispositions.</p>
+		</li>
+		<li>
+			<h3>What are Pause Codes and how do I add them?</h3>
+			<p>Pause Codes are reasons for agents to go on pause (tea break, lunch, etc.). Go to "Campaigns" menu > "Pause Codes" to add new codes.</p>
+		</li>
+		<li>
+			<h3>What are Hotkeys and how do I configure them?</h3>
+			<p>Hotkeys provide keyboard shortcuts for quick call disposition. Go to "Campaigns" menu > "Hotkeys" to enable/configure them.</p>
+		</li>
+		<li>
+			<h3>How do I recycle leads with specific dispositions?</h3>
+			<p>Go to "Campaigns" menu > "Campaign Lead Recycling". Select the dispositions to recycle, enable "Reset Hopper", then activate recycling in the campaign list.</p>
+		</li>
+		<li>
+			<h3>What is Auto Alt-Dialing?</h3>
+			<p>If enabled, the server will dial an alternate number (if available) for a lead when getting dispositions like busy, no answer, etc.</p>
+		</li>
+		<li>
+			<h3>What is List Mix and how does it work?</h3>
+			<p>List Mix allows dialing of leads from two lists together randomly or evenly within the same campaign based on configurable settings.</p>
+		</li>
+		<li>
+			<h3>How do I upload lead lists?</h3>
+			<p>Go to "Lists" menu > "Add A New List", assign list ID and campaign. Then "Load New Leads" to browse and upload the lead file (.csv or tab delimited).</p>
+		</li>
+		<li>
+			<h3>How do I download a lead list?</h3>
+			<p>Go to "Lists" menu > "Show List", select the list, then click "Click here to download this list".</p>
+		</li>
+		<li>
+			<h3>How do I add scripts for agents?</h3>
+			<p>Go to "Scripts" menu, enter the script text which will pop up for agents on receiving calls. Customer data can be highlighted in scripts.</p>
+		</li>
+		<li>
+			<h3>What are In-Groups and how are they configured?</h3>
+			<p>In-Groups are inbound call queues that agents log into to receive calls from specific DID numbers. Configure welcome message, music on hold, etc.</p>
+		</li>
+		<li>
+			<h3>How do I add a new DID number?</h3>
+			<p>Go to "Inbound" menu > "Add A New DID". You can route incoming DID calls to IVR, In-Group queues, or extensions.</p>
+		</li>
+		<li>
+			<h3>What is a Call Menu and how do I configure IVR?</h3>
+			<p>A Call Menu is an IVR flow configured with voice prompts and routing based on caller DTMF inputs. Create and modify IVRs under "Inbound" > "Call Menu".</p>
+		</li>
+		<li>
+			<h3>What are User Groups and their purpose?</h3>
+			<p>User Groups allow splitting agents into different groups with customizable permissions, campaign access restrictions, and shift timings.</p>
+		</li>
+		<li>
+			<h3>How do I view and manage phone extensions?</h3>
+			<p>Go to "Admin" menu > "Phones" to view, add or modify phone extensions that agents will use to log in.</p>
+		</li>
+		<li>
+			<h3>What are Remote Agents?</h3>
+			<p>Remote Agents are virtual agents used for voice broadcast services where pre-recorded voice messages are played when calls connect.</p>
+		</li>
+		<li>
+			<h3>How do I manage system-wide call dispositions?</h3>
+			<p>Go to "Admin" menu > "System Statuses" to enable/disable or add new global call disposition codes.</p>
+		</li>
+		<li>
+			<h3>How do I configure servers?</h3>
+			<p>The "Admin" > "Servers" menu allows viewing, adding and modifying the settings of telephony servers like Asterisk version, etc.</p>
+	    </li>
+		
+		<li>
+			<h3>How do I upload voice prompts and recordings?</h3>
+			<p>Use the "Admin" > "Audio Store" menu to upload voice prompt files in 16bit 8kHz PCM WAV format for IVR, music on hold, etc.</p>
+	    </li>
+		<li>
+			<h3>How do I configure music on hold?</h3>
+			<p>In "Admin" > "Music On Hold (MOH)", you can select audio files to play in random or sequential order when callers are held.</p>
+	    </li>
+		<li>
+			<h3>How do I access real-time reports and monitoring?</h3>
+			<p>The "Reports" menu provides access to real-time agent monitoring, live call listening/barging, service level reports, and agent performance details.</p>
+	    </li>
+		<li>
+			<h3>How do I download call recordings?</h3>
+			<p>Go to "Admin" > "Voice Logger" to filter, play and download the recorded call audio files from the server.</p>
+	    </li>
+	</ol>
+</body>
+</html>
