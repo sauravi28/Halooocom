@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Campaign Module Help</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.5;
+			padding: 20px;
+		}
+		h2 {
+			margin-top: 30px;
+		}
+	</style>
+</head>
+<body>
+	<b>• Campaign ID*</b>
+	<p>This is the short name of the campaign, it is not editable after initial submission, cannot contain spaces and must be between 2 and 8 characters in length.</p>
+
+	<b>• Campaign Name*</b>
+	<p>This is the description of the campaign, it must be between 6 and 40 characters in length.</p>
+
+	<b>• Active*</b>
+	<p>This is where you set the campaign to Active or Inactive. If Inactive, no one can log into it.</p>
+
+	<b>• Screen Label</b>
+	<p>You can select a set of screen labels to use with this option (available under admin screen labels ).</p>
+
+	<b>• Dial Method</b>
+	<p>This field is the way to define how dialing is to take place. If MANUAL then the auto_dial_level will be locked at 0 unless Dial Method is changed. If Predictive then the normal dialing a number of lines for Active agents. Inbound - Campaign will allow only inbound + Manual calling. Blended - Inbound + Outbound ( Manual ). Blended Predictive - Inbound + Outbound ( Manual + Auto dial ).</p>
+
+	<b>• Dial Timeout</b>
+	<p>Duration set for the call to be closed if not answered ( Manual + Predictive )</p>
+
+	<b>• Sticky Agent</b>
+	<p>Yes - Will allow the inbound calls to land to the same user who has last spoken to the client<br>
+	No - Will allocate the inbound calls randomly to any available user.</p>
+
+	<b>• Dial Prefix</b>
+	<p>This field allows for more easily changing a path of dialing to go out through a different method without doing a reload in Asterisk. Default is 9 based upon a 91NXXNXXXXXX in the dial plan - extensions.conf.</p>
+
+	<b>• Call Through*</b>
+	<p>Will justify the trunk through which calls needs to be routed to.</p>
+
+	<b>• Channel*</b>
+	<p>Here we define the Trunk, if in case there are multiple trunks available. Trunk ( GSM, PRI, DAHDI, VOIP )</p>
+
+	<b>• Feedback IVR</b>
+	<p>Yes - Will pass the call to the feedback IVR post call is completed ( will be create by the admin )<br>
+	No - Will close the call directly.</p>
+
+</body>
+</html>
