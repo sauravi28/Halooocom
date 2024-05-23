@@ -461,9 +461,9 @@ $label_dropdown_value7 = $_POST["dropdown7_list"];
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 style="color:#020252;">Add Screen Labels</h1>
-			<button onclick="myFunctionForFAQ();" title="Add Screen Labels FAQ" style="border: none;background-color: white;"><i class="fa fa-question-circle" aria-hidden="true" style="font-size:20px;margin-top:7px;"></i></button>
-		 
+            <h1 style="color:#020252;">Add Screen Labels<button onclick="myFunctionForFAQ();" title="help" style="border: none;"><i class="fa fa-question-circle" aria-hidden="true" style="font-size:20px;margin-top:7px;"></i></button>
+		 </h1>
+			
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
