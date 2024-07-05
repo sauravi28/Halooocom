@@ -508,7 +508,7 @@ while ($row = mysqli_fetch_assoc($user_query)) {
 			
 		
    
-			$stmt = "SELECT vl.call_date,vl.length_in_sec,vl.status,vl.user,vu.full_name,vl.campaign_id,vi.vendor_lead_code,vi.source_id,vi.list_id,vi.gmt_offset_now,vi.phone_code,vi.phone_number,vi.title,vi.first_name,vi.middle_initial,vi.last_name,vi.address1,vi.address2,vi.address3,vi.city,vi.state,vi.province,vi.postal_code,vi.country_code,vi.gender,vi.date_of_birth,vi.alt_phone,vi.email,vi.security_phrase,vi.comments,vl.length_in_sec,vl.user_group,vl.alt_dial,vi.rank,vi.owner,vi.lead_id,vl.uniqueid,vi.entry_list_id,UNIX_TIMESTAMP(vl.call_date)$export_fields_SQL,vi.field1,vi.field2,vi.field3,vi.field4,vi.field5,vi.field6,vi.field7,vi.field8,vi.field9,vi.field10,vi.field11,vi.field12,vi.field13,vi.field14,vi.field15,vi.field16,vi.field17,vi.field18,vi.field19,vi.field20,vi.field21,vi.field22,vi.field23,vi.field24,vi.field25,vi.field26,vi.field27,vi.field28,vi.field29,vi.field30,vi.field31,vi.field32,vi.field33,vi.field34,vi.field35,vi.field36,vi.field37,vi.field38,vi.field39,vi.field40,vl.phone_number,vl.recording_filename from vicidial_users vu,vicidial_log vl,vicidial_list vi where vl.call_date >= '$query_date 00:00:00' and vl.call_date <= '$end_date 23:59:59' and vu.user=vl.user and vi.lead_id=vl.lead_id $list_SQL $campaign_SQL $user_group_SQL $status_SQL order by vl.call_date desc limit 500000;";
+			$stmt = "SELECT vl.call_date,vl.length_in_sec,vl.status,vl.user,vu.full_name,vl.campaign_id,vi.vendor_lead_code,vi.source_id,vi.list_id,vi.gmt_offset_now,vi.phone_code,vi.phone_number,vi.title,vi.first_name,vi.middle_initial,vi.last_name,vi.address1,vi.address2,vi.address3,vi.city,vi.state,vi.province,vi.postal_code,vi.country_code,vi.gender,vi.date_of_birth,vi.alt_phone,vi.email,vi.security_phrase,vi.comments,vl.length_in_sec,vl.user_group,vl.alt_dial,vi.rank,vi.owner,vi.lead_id,vl.uniqueid,vi.entry_list_id,UNIX_TIMESTAMP(vl.call_date)$export_fields_SQL,vi.field1,vi.field2,vi.field3,vi.field4,vi.field5,vi.field6,vi.field7,vi.field8,vi.field9,vi.field10,vi.field11,vi.field12,vi.field13,vi.field14,vi.field15,vi.field16,vi.field17,vi.field18,vi.field19,vi.field20,vi.field21,vi.field22,vi.field23,vi.field24,vi.field25,vi.field26,vi.field27,vi.field28,vi.field29,vi.field30,vi.field31,vi.field32,vi.field33,vi.field34,vi.field35,vi.field36,vi.field37,vi.field38,vi.field39,vi.field40,vl.phone_number from vicidial_users vu,vicidial_log vl,vicidial_list vi where vl.call_date >= '$query_date 00:00:00' and vl.call_date <= '$end_date 23:59:59' and vu.user=vl.user and vi.lead_id=vl.lead_id $list_SQL $campaign_SQL $user_group_SQL $status_SQL order by vl.call_date desc limit 500000;";
 	//	echo $stmt;exit;
                 $rslt=mysql_to_mysqli($stmt, $link);
 		if ($DB) {echo "$stmt\n";}
@@ -595,18 +595,19 @@ while ($row = mysqli_fetch_assoc($user_query)) {
 				
 				// test change2
 		
-/*$selc = "select timestamp,comment from vicidial_comments where lead_id = '$row[35]'";
+$selc = "select timestamp,comment from vicidial_comments where lead_id = '$row[35]'";
 $resc = mysqli_query($link,$selc);
 while($rowc=mysqli_fetch_array($resc))
 {
 $cm.= $rowc[0].":".$rowc[1]."   ";
-}	*/
+}	
 
 
+		
+			
 
-/*$row[29] = preg_replace('/\s+/', ' ',$cm);
-$row[29] = str_replace(',', '_', $cm); */
-
+$row[29] = preg_replace('/\s+/', ' ',$cm);
+$row[29] = str_replace(',', '_', $cm);
 $row[12] = str_replace(',', '', $row[12]);
 $row[13] = str_replace(',', '', $row[13]);
 $row[14] = str_replace(',', '', $row[14]);
@@ -668,29 +669,13 @@ $row[77] = str_replace(',', '', $row[77]);
 $row[78] = str_replace(',', '', $row[78]);
 $row[79] = str_replace(',', '', $row[79]);
 
-if($row[80] == ""){
-	
-	$recording_filenameVal ="";
-}
-else{
-$str = $row[80]."-all.wav";
-$fileDate = explode("-",$str);
-$date = $fileDate[0];
-$yyyy = substr($date,0,4);
-$mm = substr($date,4,2);
-$dd = substr($date,6,2);
-$folderDate  = $yyyy."-".$mm."-".$dd;
-$recording_filenameVal = "http://10.0.0.5/Haloo_Voicelogs/voicefiles_WAV/".$folderDate."/".$row[80]."-all.wav";
-}
+
+
 
 
 				//$export_rows[$k] = "$row[0],$row[1],$row[79],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22],$row[23],$row[24],$row[25],$row[26],$row[27],$row[28],$row[29],$row[39],$row[40],$row[41],$row[42],$row[43],$row[44],$row[45],$row[46],$row[47],$row[48],$row[49],$row[50],$row[51],$row[52],$row[53],$row[54],$row[55],$row[56],$row[57],$row[58],$row[59],$row[60],$row[61],$row[62],$row[63],$row[64],$row[65],$row[66],$row[67],$row[68],$row[69],$row[70],$row[71],$row[72],$row[73],$row[74],$row[75],$row[76],$row[77],$row[78],$row[31],$row[32],$row[33],$row[34],$row[35],$export_fieldsDATA";
 				
-				/*$export_rows.= "$row[0],$row[1],$row[79],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22],$row[23],$row[24],$row[25],$row[26],$row[27],$row[28],$row[29],$row[39],$row[40],$row[41],$row[42],$row[43],$row[44],$row[45],$row[46],$row[47],$row[48],$row[49],$row[50],$row[51],$row[52],$row[53],$row[54],$row[55],$row[56],$row[57],$row[58],$row[59],$row[60],$row[61],$row[62],$row[63],$row[64],$row[65],$row[66],$row[67],$row[68],$row[69],$row[70],$row[71],$row[72],$row[73],$row[74],$row[75],$row[76],$row[77],$row[78],$row[31],$row[32],$row[33],$row[34],$row[35],$export_fieldsDATA***";*/
-				
-				$export_rows.= "$row[0],$row[11],$row[3],$row[2],$row[14],$row[5],$row[21],$row[13],,$row[18],$row[47],$row[20],$row[40],$row[41],$row[17],$row[15],$row[16],,$row[42],$row[48],$row[29],$row[1],$recording_filenameVal***";
-			
-
+				$export_rows.= "$row[0],$row[1],$row[79],$row[2],$row[3],$row[4],$row[5],,$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22],$row[23],$row[24],$row[25],$row[26],$row[27],$row[28],$row[29],$row[39],$row[40],$row[41],$row[42],$row[43],$row[44],$row[45],$row[46],$row[47],$row[48],$row[49],$row[50],$row[51],$row[52],$row[53],$row[54],$row[55],$row[56],$row[57],$row[58],$row[59],$row[60],$row[61],$row[62],$row[63],$row[64],$row[65],$row[66],$row[67],$row[68],$row[69],$row[70],$row[71],$row[72],$row[73],$row[74],$row[75],$row[76],$row[77],$row[78],$row[31],$row[32],$row[33],$row[34],$row[35],$export_fieldsDATA***";
 				
 //echo $export_rows[$k];echo "<br/>";
 
@@ -707,7 +692,7 @@ $recording_filenameVal = "http://10.0.0.5/Haloo_Voicelogs/voicefiles_WAV/".$fold
 	if ($RUNgroup > 0)
 		{
 		
-		$stmtA = "SELECT vl.call_date,vl.length_in_sec,vl.status,vl.user,vu.full_name,vl.campaign_id,vi.vendor_lead_code,vi.source_id,vi.list_id,vi.gmt_offset_now,vi.phone_code,vi.phone_number,vi.title,vi.first_name,vi.middle_initial,vi.last_name,vi.address1,vi.address2,vi.address3,vi.city,vi.state,vi.province,vi.postal_code,vi.country_code,vi.gender,vi.date_of_birth,vi.alt_phone,vi.email,vi.security_phrase,vi.comments,vl.length_in_sec,vl.user_group,vl.queue_seconds,vi.rank,vi.owner,vi.lead_id,vl.closecallid,vi.entry_list_id,vl.uniqueid,UNIX_TIMESTAMP(vl.call_date)$export_fields_SQL,vi.field1,vi.field2,vi.field3,vi.field4,vi.field5,vi.field6,vi.field7,vi.field8,vi.field9,vi.field10,vi.field11,vi.field12,vi.field13,vi.field14,vi.field15,vi.field16,vi.field17,vi.field18,vi.field19,vi.field20,vi.field21,vi.field22,vi.field23,vi.field24,vi.field25,vi.field26,vi.field27,vi.field28,vi.field29,vi.field30,vi.field31,vi.field32,vi.field33,vi.field34,vi.field35,vi.field36,vi.field37,vi.field38,vi.field39,vi.field40,vl.phone_number,vl.recording_filename from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi where vl.call_date >= '$query_date 00:00:00' and vl.call_date <= '$end_date 23:59:59' and vu.user=vl.user and vi.lead_id=vl.lead_id $list_SQL $group_SQL $user_group_SQL $status_SQL order by vl.call_date desc limit 500000;";
+		$stmtA = "SELECT vl.call_date,length_in_sec,vi.status,vl.user,vu.full_name,vl.campaign_id,vi.vendor_lead_code,vi.source_id,vi.list_id,vi.gmt_offset_now,vi.phone_code,vi.phone_number,vi.title,vi.first_name,vi.middle_initial,vi.last_name,vi.address1,vi.address2,vi.address3,vi.city,vi.state,vi.province,vi.postal_code,vi.country_code,vi.gender,vi.date_of_birth,vi.alt_phone,vi.email,vi.security_phrase,vi.comments,vl.length_in_sec,vl.user_group,vl.queue_seconds,vi.rank,vi.owner,vi.lead_id,vl.closecallid,vi.entry_list_id,vl.uniqueid,UNIX_TIMESTAMP(vl.call_date)$export_fields_SQL,vi.field1,vi.field2,vi.field3,vi.field4,vi.field5,vi.field6,vi.field7,vi.field8,vi.field9,vi.field10,vi.field11,vi.field12,vi.field13,vi.field14,vi.field15,vi.field16,vi.field17,vi.field18,vi.field19,vi.field20,vi.field21,vi.field22,vi.field23,vi.field24,vi.field25,vi.field26,vi.field27,vi.field28,vi.field29,vi.field30,vi.field31,vi.field32,vi.field33,vi.field34,vi.field35,vi.field36,vi.field37,vi.field38,vi.field39,vi.field40,vl.phone_number from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi where vl.call_date >= '$query_date 00:00:00' and vl.call_date <= '$end_date 23:59:59' and vu.user=vl.user and vi.lead_id=vl.lead_id $list_SQL $group_SQL $user_group_SQL $status_SQL order by vl.call_date desc limit 500000;";
    $rslt=mysql_to_mysqli($stmtA, $link);
 		if ($DB) {echo "$stmtA\n";}
 		$inbound_to_print = mysqli_num_rows($rslt);
@@ -855,26 +840,19 @@ $row[77] = str_replace(',', '', $row[77]);
 $row[78] = str_replace(',', '', $row[78]);
 $row[79] = str_replace(',', '', $row[79]);
 	
-if($row[81] == ""){
 	
-	$recording_filenameVal ="";
-}
-else{
-$str = $row[81]."-all.wav";
-$fileDate = explode("-",$str);
-$date = $fileDate[0];
-$yyyy = substr($date,0,4);
-$mm = substr($date,4,2);
-$dd = substr($date,6,2);
-$folderDate  = $yyyy."-".$mm."-".$dd;
-$recording_filenameVal = "http://10.0.0.5/Haloo_Voicelogs/voicefiles_WAV/".$folderDate."/".$row[81]."-all.wav";
-}
+				$sql_groupName  = "SELECT `group_name` FROM `vicidial_inbound_groups` where `group_id`='$row[5]'";
+				//echo $sql_groupName;
+				//echo "<br>";
+				$res_groupName = mysqli_query($link,$sql_groupName);
+				$row_groupName = mysqli_fetch_array($res_groupName);
+				$IngroupName = $row_groupName[0];
+				
 
-		/*$export_rows[$k] = "$row[0],$row[1],$row[79],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22],$row[23],$row[24],$row[25],$row[26],$row[27],$row[28],$row[29],$row[39],$row[40],$row[41],$row[42],$row[43],$row[44],$row[45],$row[46],$row[47],$row[48],$row[49],$row[50],$row[51],$row[52],$row[53],$row[54],$row[55],$row[56],$row[57],$row[58],$row[59],$row[60],$row[61],$row[62],$row[63],$row[64],$row[65],$row[66],$row[67],$row[68],$row[69],$row[70],$row[71],$row[72],$row[73],$row[74],$row[75],$row[76],$row[77],$row[78],$row[31],$row[32],$row[33],$row[34],$row[35],$export_fieldsDATA"
-;*/
-
-				$export_rows[$k] = "$row[0],$row[11],$row[3],$row[2],$row[14],$row[5],$row[21],$row[13],,$row[18],$row[48],$row[20],$row[41],$row[42],$row[17],$row[15],$row[16],,$row[43],$row[49],$row[29],$row[1],$recording_filenameVal";
-
+	
+	//$row[5];
+	$export_rows[$k] = "$row[0],$row[1],$row[79],$row[2],$row[3],$row[4],$row[5],$IngroupName,$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22],$row[23],$row[24],$row[25],$row[26],$row[27],$row[28],$row[29],$row[39],$row[40],$row[41],$row[42],$row[43],$row[44],$row[45],$row[46],$row[47],$row[48],$row[49],$row[50],$row[51],$row[52],$row[53],$row[54],$row[55],$row[56],$row[57],$row[58],$row[59],$row[60],$row[61],$row[62],$row[63],$row[64],$row[65],$row[66],$row[67],$row[68],$row[69],$row[70],$row[71],$row[72],$row[73],$row[74],$row[75],$row[76],$row[77],$row[78],$row[31],$row[32],$row[33],$row[34],$row[35],$export_fieldsDATA"
+;
 				//$export_rows[$k] = "$row[0],$row[1],$row[79],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10],$row[11],$row[12],$row[13],$row[14],$row[15],$row[16],$row[17],$row[18],$row[19],$row[20],$row[21],$row[22],$row[23],$row[24],$row[25],$row[26],$row[27],$row[28],$row[29],$row[30],$row[31],$row[32],$row[33],$row[34],$row[35],$export_fieldsDATA";
 				$i++;
 				$k++;
@@ -1176,7 +1154,7 @@ $recording_filenameVal = "http://10.0.0.5/Haloo_Voicelogs/voicefiles_WAV/".$fold
 					}
 				}
 
-			$RAW_EXPORT[$i] = "$export_rows[$i]\r\n"; //$ex_list_name,$ex_list_description,$ex_status_name$rec_data$extended_data$notes_data$custom_data
+			$RAW_EXPORT[$i] = "$export_rows[$i]$ex_list_name,$ex_list_description,$ex_status_name$rec_data$extended_data$notes_data$custom_data\r\n";
 			$i++;
 			}
 
@@ -1211,9 +1189,8 @@ $recording_filenameVal = "http://10.0.0.5/Haloo_Voicelogs/voicefiles_WAV/".$fold
   $stmtl = "SELECT  label_title,label_first_name,label_middle_initial,label_last_name,label_address1,label_address2,label_address3,label_city,label_state,label_province,label_postal_code,label_vendor_lead_code,label_gender,label_phone_number,label_phone_code,label_alt_phone,label_email,label_security_phrase,label_comments,label_field1,label_field2,label_field3,label_field4,label_field5,label_field6,label_field7,label_field8,label_field9,label_field10,label_field11,label_field12,label_field13,label_field14,label_field15,label_field16,label_field17,label_field18,label_field19,label_field20,label_field21,label_field22,label_field23,label_field24,label_field25,label_field26,label_field27,label_field28,label_field29,label_field30,label_field31,label_field32,label_field33,label_field34,label_field35,label_field36,label_field37,label_field38,label_field39,label_field40 from vicidial_screen_labels where  label_id='$rowc[0]';";
 		$rsltl=mysql_to_mysqli($stmtl, $link);
         $rowl = mysqli_fetch_row($rsltl);
-			echo "Call_Date,Phone_Number,Agent_Name,Call_Status,List_ID,Campaign,Title,Name,Middle_Name,Address,Last_CallLog,Loan_Details,Payment_Details, Payment_Deadline,State,CRN,UID,Gender,Extension_Deadline,Admin_Link,Comments,Call_Duration,Recording_Path$RFheader$EXheader$NFheader$CFheader\r\n";
+			echo "call_date,duration,phone_dialed_no,status,user,full_name,campaign_id,Ingroup_Name,$rowl[11],source_id,list_id,gmt_offset_now,$rowl[14],$rowl[13],$rowl[0],$rowl[1],$rowl[2],$rowl[3],$rowl[4],$rowl[5],$rowl[6],$rowl[7],$rowl[8],$rowl[9],$rowl[10],$rowl[11],gender,date_of_birth,$rowl[15],$rowl[16],$rowl[17],comments,$rowl[19],$rowl[20],$rowl[21],$rowl[22],$rowl[23],$rowl[24],$rowl[25],$rowl[26],$rowl[27],$rowl[28],$rowl[29],$rowl[30],$rowl[31],$rowl[32],$rowl[33],$rowl[34],$rowl[35],$rowl[36],$rowl[37],$rowl[38],$rowl[39],$rowl[40],$rowl[41],$rowl[42],$rowl[43],$rowl[44],$rowl[45],$rowl[46],$rowl[47],$rowl[48],$rowl[49],$rowl[50],$rowl[51],$rowl[52],$rowl[53],$rowl[54],$rowl[55],$rowl[56],$rowl[57],$rowl[58],user_group,alt_dial,rank,owner,lead_id$EFheader,list_name,list_description,status_name$RFheader$EXheader$NFheader$CFheader\r\n";
 			}
-
 
 		### sort the duplicate check in newest to oldest call order by lead_id
 		rsort($export_duplicate_check_line);
